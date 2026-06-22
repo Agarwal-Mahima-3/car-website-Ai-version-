@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Buy Now</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="1.css">
+  <style>
+    .buy-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 26px 20px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .buy-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 16px;
+      margin-top: 14px;
+    }
+
+    .buy-card {
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      padding: 18px 18px;
+    }
+
+    .buy-card h2 {
+      margin: 0 0 12px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field label {
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .buy-btn {
+      width: 100%;
+      margin-top: 12px;
+      background-color: rgba(225, 6, 0, 0.95);
+      border: 1px solid rgba(225, 6, 0, 0.8);
+      color: #fff;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 12px 14px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform 160ms ease, filter 160ms ease;
+    }
+
+    .buy-btn:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.08);
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 10px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .summary-row:first-of-type {
+      border-top: none;
+      padding-top: 6px;
+    }
+
+    .summary-row .k {
+      color: var(--muted);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    .summary-row .v {
+      font-weight: 900;
+      color: var(--text);
+      text-align: right;
+    }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    .summary-note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 1.5;
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .buy-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="menu">
+    <ul>
+      <li><a href="1.html">Home</a></li>
+      <li><a href="about.html">Feedback</a></li>
+    </ul>
+  </div>
+
+  <main class="buy-main">
+    <h1 class="page-title">BUY NOW</h1>
+    <hr>
+
+    <div class="buy-grid">
+      <section class="buy-card" aria-label="Payment form">
+        <h2>Payment</h2>
+
+        <form action="done.html" method="get">
+          <input type="hidden" name="car" id="hidden-car" value="">
+          <input type="hidden" name="price" id="hidden-price" value="">
+
+          <div class="field" style="margin-bottom:12px;">
+            <label>Accepted Cards</label>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <i class="fa fa-cc-visa" style="color:#1b4fff; font-size:22px;"></i>
+              <i class="fa fa-cc-amex" style="color:#2aa2ff; font-size:22px;"></i>
+              <i class="fa fa-cc-mastercard" style="color:#ff2a2a; font-size:22px;"></i>
+              <i class="fa fa-cc-discover" style="color:#ff9900; font-size:22px;"></i>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="cname">Name on Card</label>
+              <input id="cname" type="text" name="cname" placeholder="John More Doe" required>
+            </div>
+
+            <div class="field">
+              <label for="ccnum">Credit Card Number</label>
+              <input id="ccnum" type="text" name="ccnum" placeholder="1111-2222-3333-4444" required>
+            </div>
+
+            <div class="field">
+              <label for="expmonth">Exp Month</label>
+              <input id="expmonth" type="text" name="expmonth" placeholder="09" required>
+            </div>
+
+            <div class="field">
+              <label for="expyear">Exp Year</label>
+              <input id="expyear" type="text" name="expyear" placeholder="2028" required>
+            </div>
+
+            <div class="field">
+              <label for="cvv">CVV</label>
+              <input id="cvv" type="text" name="cvv" placeholder="352" required>
+            </div>
+
+            <div class="field">
+              <label for="sameadr">
+                <input id="sameadr" type="checkbox" name="sameadr" checked>
+                Shipping same as billing
+              </label>
+            </div>
+          </div>
+
+          <div style="height: 14px;"></div>
+
+          <h2 style="margin-top:0;">Billing Address</h2>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="fname">Full Name</label>
+              <input id="fname" type="text" name="fname" placeholder="John M. Doe" required>
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="text" name="email" placeholder="john@example.com" required>
+            </div>
+
+            <div class="field" style="grid-column: span 2;">
+              <label for="adr">Address</label>
+              <input id="adr" type="text" name="adr" placeholder="542 W. 15th Street" required>
+            </div>
+
+            <div class="field">
+              <label for="city">City</label>
+              <input id="city" type="text" name="city" placeholder="New York" required>
+            </div>
+
+            <div class="field">
+              <label for="state">State</label>
+              <input id="state" type="text" name="state" placeholder="NY" required>
+            </div>
+
+            <div class="field" style="grid-column: span 2;">
+              <label for="zip">Zip</label>
+              <input id="zip" type="text" name="zip" placeholder="10001" required>
+            </div>
+          </div>
+
+          <button class="buy-btn" type="submit">
+            Continue to checkout
+          </button>
+        </form>
+      </section>
+
+      <aside class="buy-card" aria-label="Order summary">
+        <h2>Order Summary</h2>
+        <div class="summary-row">
+          <div class="k">Vehicle</div>
+          <div class="v mono" id="summary-car">Carvillex Collection</div>
+        </div>
+        <div class="summary-row">
+          <div class="k">Price</div>
+          <div class="v mono" id="summary-price">₹ 0.00</div>
+        </div>
+        <div class="summary-row">
+          <div class="k">Delivery</div>
+          <div class="v mono">Standard</div>
+        </div>
+        <div class="summary-row">
+          <div class="k">Total</div>
+          <div class="v mono" id="summary-total">₹ 0.00</div>
+        </div>
+
+        <p class="summary-note" id="summary-note">
+          Select a vehicle from any brand collection to see pricing here.
+        </p>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var car = params.get("car") || "Carvillex Collection";
+      var price = params.get("price") || "₹ 0.00";
+
+      document.getElementById("summary-car").textContent = car;
+      document.getElementById("summary-price").textContent = price;
+      document.getElementById("summary-total").textContent = price;
+      document.getElementById("hidden-car").value = car;
+      document.getElementById("hidden-price").value = price;
+
+      if (params.get("car")) {
+        document.title = "Buy Now — " + car;
+        document.getElementById("summary-note").textContent =
+          "Review your selection and complete checkout below.";
+      }
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thank You — Carvillex</title>
+  <link rel="stylesheet" type="text/css" href="1.css">
+</head>
+
+<body>
+  <div class="menu">
+    <ul>
+      <li><a href="1.html">Home</a></li>
+      <li><a href="about.html">Feedback</a></li>
+    </ul>
+  </div>
+
+  <div class="content-wrap">
+    <h1 class="page-title">THANK YOU</h1>
+    <hr>
+
+    <section class="done-card" aria-label="Confirmation">
+      <p id="done-message">Your information has been saved.</p>
+      <p class="order-detail" id="order-confirmation"></p>
+
+      <div class="done-actions">
+        <a class="btn-primary" href="1.html">Back to Home</a>
+        <a class="btn-secondary" href="about.html">Leave Feedback</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var type = params.get("type");
+      var car = params.get("car");
+      var price = params.get("price");
+      var name = params.get("name");
+      var rate = params.get("rate");
+
+      if (type === "feedback") {
+        document.title = "Feedback Received — Carvillex";
+        var msg = "Thanks for your feedback";
+        if (name) {
+          msg += ", " + name;
+        }
+        msg += "!";
+        if (rate) {
+          msg += " You rated us: " + rate + ".";
+        }
+        document.getElementById("done-message").textContent = msg;
+      } else if (car) {
+        document.title = "Order Confirmed — Carvillex";
+        document.getElementById("done-message").textContent = "Your order has been received.";
+        var detail = car;
+        if (price) {
+          detail += " — " + price;
+        }
+        document.getElementById("order-confirmation").textContent = detail;
+      }
+    })();
+  </script>
+</body>
+
+</html>

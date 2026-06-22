@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Feedback — Carvillex</title>
+  <link rel="stylesheet" type="text/css" href="1.css">
+</head>
+
+<body>
+  <div class="menu">
+    <ul>
+      <li><a href="1.html">Home</a></li>
+      <li><a href="about.html">Feedback</a></li>
+    </ul>
+  </div>
+
+  <div class="content-wrap">
+    <h1 class="page-title">FEEDBACK</h1>
+    <hr>
+
+    <section class="feedback-card" aria-label="Feedback form">
+      <h2>Tell us about your experience</h2>
+
+      <form action="done.html" method="get">
+        <input type="hidden" name="type" value="feedback">
+
+        <div class="feedback-field">
+          <label for="name">Name</label>
+          <input id="name" type="text" name="name" placeholder="Your name" required>
+        </div>
+
+        <div class="feedback-field">
+          <label>Gender</label>
+          <div class="radio-row">
+            <label><input type="radio" name="gender" value="Male" required> Male</label>
+            <label><input type="radio" name="gender" value="Female"> Female</label>
+          </div>
+        </div>
+
+        <div class="feedback-field">
+          <label for="phone">Phone No.</label>
+          <input id="phone" type="text" name="phone" placeholder="9876543210">
+        </div>
+
+        <div class="feedback-field">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" name="email" placeholder="you@example.com">
+        </div>
+
+        <div class="feedback-field">
+          <label for="address">Address</label>
+          <input id="address" type="text" name="address" placeholder="City, State">
+        </div>
+
+        <div class="feedback-field">
+          <label for="comment">Comment</label>
+          <textarea id="comment" name="comment" rows="4" placeholder="Share your thoughts..."></textarea>
+        </div>
+
+        <div class="feedback-field">
+          <label>Rate your experience</label>
+          <div class="radio-row" style="flex-direction: column; align-items: flex-start; gap: 10px;">
+            <label><input type="radio" name="rate" value="Excellent" required> Excellent</label>
+            <label><input type="radio" name="rate" value="Good"> Good</label>
+            <label><input type="radio" name="rate" value="Average"> Average</label>
+            <label><input type="radio" name="rate" value="Up To The Mark"> Up To The Mark</label>
+            <label><input type="radio" name="rate" value="Need To Improve"> Need To Improve</label>
+          </div>
+        </div>
+
+        <button class="btn-primary" type="submit" style="width:100%; margin-top:8px;">
+          Submit Feedback
+        </button>
+      </form>
+    </section>
+  </div>
+</body>
+
+</html>

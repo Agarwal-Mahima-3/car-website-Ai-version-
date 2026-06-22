@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CARVILLEX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;600;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg0: #050507;
+      --card: rgba(255, 255, 255, 0.05);
+      --card2: rgba(255, 255, 255, 0.02);
+      --border: rgba(255, 255, 255, 0.12);
+      --text: #f6f6f8;
+      --muted: rgba(246, 246, 248, 0.72);
+      --accent: #e10600; /* Porsche-like red */
+      --gold: rgba(225, 6, 0, 1);
+      --shadow: 0 16px 52px rgba(0, 0, 0, 0.72);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+
+      background-color: var(--bg0);
+      background-image:
+        radial-gradient(1200px 600px at 20% 0%, rgba(225, 6, 0, 0.14), transparent 60%),
+        radial-gradient(900px 500px at 80% 20%, rgba(255, 255, 255, 0.04), transparent 55%);
+      background-repeat: no-repeat;
+      min-height: 100vh;
+    }
+
+    /* Use your provided photo very subtly as “texture” */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.80)),
+        url('5.jpg');
+      background-size: cover;
+      background-position: center;
+      mix-blend-mode: overlay;
+      opacity: 0.22;
+    }
+
+    /* Carbon-fiber weave overlay */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        repeating-linear-gradient(60deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 10px),
+        repeating-linear-gradient(-60deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 12px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 3px),
+        repeating-linear-gradient(135deg, rgba(225, 6, 0, 0.06) 0 2px, transparent 2px 14px);
+      opacity: 0.22;
+      filter: contrast(120%) saturate(85%);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.55);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .nav ul {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+    }
+
+    .nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      padding: 0 16px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(0, 0, 0, 0.22);
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    .nav a:hover {
+      transform: translateY(-1px);
+      border-color: rgba(225, 6, 0, 0.72);
+      background: rgba(225, 6, 0, 0.10);
+      box-shadow: 0 12px 30px rgba(225, 6, 0, 0.10);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 20px 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Background video (behind all content) */
+    .bg-video {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.55;
+      filter: saturate(0.95) contrast(1.05) brightness(0.65);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 18px;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 22px;
+    }
+
+    .logo {
+      width: 92px;
+      height: 92px;
+      object-fit: cover;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.04);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .title {
+      margin: 0;
+      font-family: "Cormorant Garamond", "Playfair Display", Georgia, "Times New Roman", serif;
+      font-weight: 700;
+      font-size: clamp(40px, 5vw, 64px);
+      letter-spacing: 0.6px;
+      line-height: 1.05;
+      color: #fff;
+      position: relative;
+      text-transform: uppercase;
+    }
+
+    .title::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      width: 140px;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), rgba(241, 241, 244, 0.85));
+      opacity: 0.95;
+    }
+
+    .tagline {
+      margin: 8px 0 0;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      max-width: 520px;
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .spec-row {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .spec {
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(10px);
+      min-width: 190px;
+    }
+
+    .spec .k {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .spec .v {
+      margin-top: 6px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      font-size: 14px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, var(--card), var(--card2));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px 22px;
+      backdrop-filter: blur(10px);
+    }
+
+    .section {
+      margin: 18px 0;
+    }
+
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      position: relative;
+    }
+
+    .section h2::after {
+      content: "";
+      display: block;
+      width: 70px;
+      height: 1px;
+      margin-top: 12px;
+      background: linear-gradient(90deg, var(--accent), rgba(255, 255, 255, 0));
+      opacity: 0.9;
+    }
+
+    .section p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .media-wrap {
+      padding: 14px;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .brand-card {
+      text-decoration: none;
+      color: inherit;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(0, 0, 0, 0.25);
+      padding: 14px 12px;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      min-height: 180px;
+      justify-content: center;
+    }
+
+    .brand-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(225, 6, 0, 0.70);
+      background: rgba(225, 6, 0, 0.08);
+    }
+
+    .brand-card img {
+      width: 92px;
+      height: 92px;
+      object-fit: contain;
+      border-radius: 14px;
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .brand-card span {
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #fff;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .brand-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nav {
+        justify-content: center;
+      }
+
+      .hero {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .tagline {
+        text-align: center;
+      }
+
+      .title::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <video class="bg-video" src="carv.mp4" autoplay muted loop playsinline></video>
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="about.html">Feedback</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="Carvillex hero">
+      <img class="logo" src="logo1.jpg" alt="Carvillex logo">
+      <div class="hero-right">
+        <h1 class="title">CARVILLEX</h1>
+        <p class="tagline">SUPERCAR-INSPIRED AUTOMOTIVE EXPERIENCE</p>
+        <div class="spec-row" aria-label="Highlights">
+          <div class="spec">
+            <div class="k">Design</div>
+            <div class="v">Carbon-Grade Styling</div>
+          </div>
+          <div class="spec">
+            <div class="k">Performance</div>
+            <div class="v">Precision Feel & Drive</div>
+          </div>
+          <div class="spec">
+            <div class="k">Craft</div>
+            <div class="v">Luxury Layout System</div>
+          </div>
+          <div class="spec">
+            <div class="k">Handling</div>
+            <div class="v">Tight Control & Balance</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section card">
+      <h2>INTRODUCTION</h2>
+      <p>
+        A car (or automobile) is a wheeled motor vehicle that is used for transportation. Most definitions of
+        cars say that they run primarily on roads, seat one to eight people, have four wheels, and mainly
+        transport people instead of goods.
+      </p>
+    </section>
+
+    <section class="section card">
+      <h2>BRANDS</h2>
+      <div class="brand-grid">
+        <a class="brand-card" href="carc.html">
+          <img src="d.png" alt="TATA logo">
+          <span>TATA</span>
+        </a>
+        <a class="brand-card" href="carc1.html">
+          <img src="m.jpg" alt="Mercedes logo">
+          <span>MERCEDES</span>
+        </a>
+        <a class="brand-card" href="carc2.html">
+          <img src="v.png" alt="Volkswagen logo">
+          <span>VOLKSWAGEN</span>
+        </a>
+        <a class="brand-card" href="carc4.html">
+          <img src="j.jpg" alt="Jaguar logo">
+          <span>JAGUAR</span>
+        </a>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
